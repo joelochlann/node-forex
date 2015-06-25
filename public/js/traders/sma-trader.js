@@ -1,5 +1,5 @@
 (function(){
-	window.BasicTrader = {
+	window.SimpleMovingAverageTrader = {
 		buy:false,
 		sell:false,
         memorySize: 100000,
