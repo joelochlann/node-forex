@@ -7,6 +7,7 @@
 		buySignal: function(tick) {
             this.pushToMemory(tick);
             var sma = new Sma(50,100, this.memory);
+            sma.parse();
             if (sma.isGoldenCrossHint()) {
                 this.buy = true;
             }
@@ -19,6 +20,7 @@
 				return false;
 			}
             var sma = new Sma(50,100, this.memory);
+            sma.parse();
             if (sma.isDeathCrossHint()) {
                 this.sell = true;
             }
