@@ -1,5 +1,5 @@
 (function(){
-	window.SimpleMovingAverageTrader = {
+	window.SimpleMovingAverageTrader = Trader.extend({
 		buy:false,
 		sell:false,
         memorySize: 100000,
@@ -35,5 +35,5 @@
         emptyMemory: function () {
             this.memory = new Array();
         }
-	}
+	});
 })();

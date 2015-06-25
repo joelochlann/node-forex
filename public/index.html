@@ -22,24 +22,38 @@
 
         <!-- Templates here-->
         <script id="trader-template" lass='handlebars' type="text/x-handlebars-template">
-            <div class='trader panel panel-default' data-id="{{id}}">
-                <div class='panel-heading clearfix'>
-                    <h3 class='panel-title pull-left'>{{title}}</h3>
-                    <button class="btn pull-right" data-target=".trader-options" data-toggle="collapse" data-parent=".trader">Options</button>
-                </div>
-                <div class='trader-body panel-body'>
-                    <div class="trader-options panel-collapse collapse" role="tabpanel">
-                        <input />
+            <div class="col-lg-6">
+                <div class='trader panel panel-default' data-id="{{id}}">
+                    <div class='panel-heading clearfix'>
+                        <div class="clearfix">
+                            <h3 class='panel-title pull-left'>{{title}}</h3>
+                            <button class="btn pull-right" data-target="[data-id='{{id}}'] .trader-options" data-toggle="collapse" data-parent=".trader">Options</button>
+                        </div>    
+                        <div class="clearfix">
+                            <form class="form-horizontal trader-options panel-collapse collapse" role="tabpanel">
+                                {{#each inputs}}
+                                    <div class="form-group">
+                                        <label class="col-sm-7 control-label">{{this.name}}</label>
+                                        <div class="col-sm-5">
+                                            <input type="number" class="form-control" data-property="{{this.property}}" value="{{this.value}}">
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            </form>
+                        </div>
                     </div>
-                    <div class='trader-last-trade'>
+                    <div class='trader-body panel-body'>
+
+                        <div class='trader-last-trade'>
+                        </div>
+                        <div class='trader-last-profit'>
+                        </div>
                     </div>
-                    <div class='trader-last-profit'>
-                    </div>
-                </div>
-                <div class='panel-footer'>
-                    <div class="trader-balance">
-                    </div>
-                    <div class = "trader-amount">
+                    <div class='panel-footer'>
+                        <div class="trader-balance">
+                        </div>
+                        <div class = "trader-amount">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,7 +85,7 @@
         </script>
 
         <script id="tick-widget-template" type="text/x-handlebars-template">
-            <div class="tick-widget">
+            <div class="tick-widget label">
                 Last price: {{close}}
             </div>
         </script>
@@ -81,6 +95,7 @@
         <script type='text/javascript' src='/js/trader.js'></script>
         <script type='text/javascript' src='/js/traders/random-trader.js'></script>
         <script type='text/javascript' src='/js/traders/moving-average-trader.js'></script>
+        <script type='text/javascript' src='/js/traders/sma-trader.js'></script>
 
         <!-- Entrance into scripts -->
         <script type='text/javascript' src='/js/main.js'></script>
@@ -103,36 +118,11 @@
             <h3 class="text-muted">Algorithmic Trading In The Browser</h3>
           </div>
 
-          <div class="jumbotron">
-            <h1>Big Fat Price Graph</h1>
-            <div class="panel panel-default">
-              <div id="price-chart" class="panel-body"></div>
-            </div>
+          <div class="panel panel-default">
+            <div id="price-chart" class="panel-body"></div>
           </div>
 
-          <div class="row marketing">
-            <div id="traders" class="col-lg-6">
-              <h4>Subheading</h4>
-              <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-              <h4>Subheading</h4>
-              <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-              <h4>Subheading</h4>
-              <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-            </div>
-
-            <div class="col-lg-6">
-              <h4>Subheading</h4>
-              <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-              <h4>Subheading</h4>
-              <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-              <h4>Subheading</h4>
-              <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-            </div>
-         </div>
+          <div id="traders" class="row"></div>
           <footer class="footer">
             <p>&copy; Dom, Joe & Hongfu 2015</p>
           </footer>

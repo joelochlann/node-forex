@@ -68,6 +68,10 @@
 
 		displayAmount: function(template) {
 			return template({'current_amount':this.amount});
+		},
+
+		inputs: function() {
+			return {};
 		}
 	});
 })();

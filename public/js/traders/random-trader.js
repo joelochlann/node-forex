@@ -2,6 +2,8 @@
 	window.RandomTrader = Trader.extend({
 		buy: false,
 		sell: false,
+		someParam: 24,
+		someOtherParam: 53,
 		buySignal: function(tick) {
 			this.buy = Math.floor(Math.random() * 2) === 0;
 
@@ -15,6 +17,12 @@
 			this.sell = Math.floor(Math.random() * 2) === 0;
 
 			return this.sell;
-		}
+		},
+		inputs: function() {
+			return [
+				{name: 'Some param', property: 'someParam', value: this.someParam},
+				{name: 'Some other param', property: 'someOtherParam', value: this.someOtherParam}
+			];
+		}	
 	});
 })();

@@ -36,7 +36,9 @@
 			return (this.previousClose > this.previousMA && tick.close < this.currentMA);
 		},
 		inputs: function() {
-			return {period: this.period};
+			return [
+				{name: 'Period', property: 'period', value: this.period}
+			];
 		}
 	});
 })();
