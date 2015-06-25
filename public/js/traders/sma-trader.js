@@ -1,12 +1,33 @@
-(function(){
-	window.SimpleMovingAverageTrader = {
+window.SimpleMovingAverageTrader = (function(){
+    var self = this;
+
+    this.memorySize = 100000;
+
+    this.memory = [];
+
+    this.pushToMemory = function (tick) {
+        this.memory.push(tick);
+        // So we remove the last element from out memory if it exceed the memory size.
+        if (this.memory.length > this.memorySize) {
+            this.memory.pop();
+        }
+    };
+    var emptyMemory = function () {
+        self.memory = new Array();
+    };
+    var init = function() {
+        self.needInit=false;
+    };
+
+    return {
 		buy:false,
 		sell:false,
-        memorySize: 100000,
-        memory:[],
 		buySignal: function(tick) {
-            this.pushToMemory(tick);
-            var sma = new Sma(50,100, this.memory);
+            if(typeof self.need_init==='undefined') {
+                init();
+            }
+            self.pushToMemory(tick);
+            var sma = new Sma(5,10, self.memory);
             sma.parse();
             if (sma.isGoldenCrossHint()) {
                 this.buy = true;
@@ -19,7 +40,7 @@
 			if (this.buy) {
 				return false;
 			}
-            var sma = new Sma(50,100, this.memory);
+            var sma = new Sma(5,10, self.memory);
             sma.parse();
             if (sma.isDeathCrossHint()) {
                 this.sell = true;
@@ -27,15 +48,5 @@
 
 			return this.sell;
 		},
-        pushToMemory: function (tick) {
-            this.memory.push(tick);
-            // So we remove the last element from out memory if it exceed the memory size.
-            if (this.memory.length > this.memorySize) {
-                this.memory.pop();
-            }
-        },
-        emptyMemory: function () {
-            this.memory = new Array();
-        }
-	}
+    }
 })();

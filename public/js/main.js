@@ -4,6 +4,7 @@
 
 			// Set up traders
 			traders = [new Trader("RandomTrader", 10000, RandomTrader.buySignal, RandomTrader.sellSignal)];
+			traders = [new Trader("SMATrader", 10000, SimpleMovingAverageTrader.buySignal, SimpleMovingAverageTrader.sellSignal)];
 
 			// Set up status bar
 			var statusBar = $(document).find("#status-bar");
