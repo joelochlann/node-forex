@@ -1,10 +1,33 @@
 <html>
     <head>
         <title>Algorithmic Trading in a browser!</title>
-        <script type='text/javascript' src='/scripts/jquery-2.1.4.min.js'></script>
-        <script type='text/javascript' src='/scripts/underscore-min.js'></script>
-        <script type='text/javascript' src='/scripts/main.js'></script>
+        <script type='text/javascript' src='scripts/jquery-2.1.4.min.js'></script>
+        <script type='text/javascript' src='scripts/underscore-min.js'></script>
+        <script type='text/javascript' src='scripts/main.js'></script>
+        <script type='text/javascript'>
+        	$(document).ready(function() {
+        		window.Platform.run('ws://crmdevel3.worldfirst.local:3000/');
+        	});
+        </script>
+        <style type='text/css'>
+        	#main {
+        		width:80%;
+        		margin:auto;
+        	}
+        	#status-bar {
+        		width:100%;
+        		height:30px;
+        	}
+        	#status-bar::before {
+        		content:"Last Known Status:";
+        	}
+        </style>
     </head>
     <body>
+    	<h1>World First Hackathon</h1>
+    	<div id='main'>
+    		<div id='status-bar'>
+    		</div>
+    	</div>
     </body>
 </html>
