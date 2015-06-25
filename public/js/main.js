@@ -1,6 +1,6 @@
 (function() {
 	window.Platform = {
-		run:function(socketAddress) {
+		run:function() {
 
 			// Set up traders
 			traders = [new Trader("FirstTrader", 10000, StupidTrader.buySignal, StupidTrader.sellSignal)];
