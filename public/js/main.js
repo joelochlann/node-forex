@@ -11,6 +11,12 @@
 		    var traderTemplateSource = $("#trader-template").html();
 		    var traderTemplate = Handlebars.compile(traderTemplateSource);
 
+		    var tickWidgetLocation = $("li.active[role=presentation]");
+
+		    tickWidget = new TickWidget();
+		    var tickWidgetSource = $("#tick-widget-template").html();
+		    var tickTemplate = Handlebars.compile(tickWidgetSource);
+
 		    var tradersElement = $("#traders");
 
             this.initCharts();
@@ -18,8 +24,11 @@
 		    var socket = io();
 		    socket.on('tick', function(tick) {
 		        console.log(tick);
+
                 var chart = $('#price-chart').highcharts();
                 chart.series[0].addPoint([tick.timestamp, tick.close]);
+
+		    	tickWidgetLocation.html(tickWidget.display(tickTemplate, tick));
 
 		        tradersElement.empty();
 

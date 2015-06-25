@@ -21,26 +21,37 @@
 
         <!-- Templates here-->
         <script id="trader-template" type="text/x-handlebars-template">
-            <div class='trader'>
-              <h1>{{title}}</h1>
-              <div class='trader-body'>
-                <div class='trader-balance property'>
-                    {{balance}}
+            <div class='trader panel panel-default'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'>{{title}}</h3>
                 </div>
-                <div class='trader-last-trade property'>
-                    {{last_trade}}
+                <div class='trader-body panel-body'>
+                    <div class='trader-last-trade property'>
+                        {{last_trade}}
+                    </div>
+                    <div class='trader-last-profit property'>
+                        {{last_profit}}
+                    </div>
                 </div>
-                <div class='trader-last-profit property'>
-                    {{last_profit}}
+                <div class='panel-footer'>
+                    <div>
+                        GBP Balance: {{balance}}
+                    </div>
+                    <div>
+                        USD Balance: {{current_amount}}
+                    </div>
                 </div>
-                <div class='trader-current-amount property'>
-                    {{current_amount}}
-                </div>
-              </div>
+            </div>
+        </script>
+
+        <script id="tick-widget-template" type="text/x-handlebars-template">
+            <div class="tick-widget">
+                Last price: {{close}}
             </div>
         </script>
         
         <!-- Traders -->
+        <script type='text/javascript' src='/js/tick-widget.js'></script>
         <script type='text/javascript' src='/js/trader.js'></script>
         <script type='text/javascript' src='/js/traders/stupid-trader.js'></script>
 
@@ -57,7 +68,9 @@
           <div class="header clearfix">
             <nav>
               <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="#">Widget Showing Price Ticks</a></li>
+                <li role="presentation" class="active">
+                    <!-- Tick widget goes here -->
+                </li>
               </ul>
             </nav>
             <h3 class="text-muted">Algorithmic Trading In The Browser</h3>
