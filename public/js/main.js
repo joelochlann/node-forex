@@ -30,6 +30,4 @@
 		    // @todo: Find out onError.
 		}
 	}
-
-
 })();
