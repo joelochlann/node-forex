@@ -1,5 +1,6 @@
 (function(){
-	window.Trader = function(balance, buyFunction, sellFunction) {
+	window.Trader = function(title, balance, buyFunction, sellFunction) {
+		this.title = title;
 		this.balance = balance;
 		this.buyFunction = buyFunction;
 		this.sellFunction = sellFunction;
@@ -14,6 +15,18 @@
 				this.balance += this.amount * tick.close;
 				this.amount = 0;
 			}
+		};
+
+		this.display = function(template) {
+			var context = {
+				title:this.title, 
+				balance:this.balance, 
+				last_trade:'', 
+				last_profit:'', 
+				current_amount:this.amount
+			}
+
+			return template(context);
 		}
 	}	
 })();

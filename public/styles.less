@@ -1,0 +1,45 @@
+#main {
+	width:80%;
+	margin:auto;
+}
+#status-bar {
+	width:100%;
+	height:30px;
+
+    &::before {
+        content:"Last Known Status:";
+    }
+}
+
+.trader {
+    border:1px solid black;
+    width:200px;
+    float:left;
+    margin-right:10px;
+    box-shadow:10px 10px 5px #888888;
+    padding:5px;
+
+    .trader-balance::before {
+        content: "Balance:";
+        min-width:80px;
+        display:inline-block;
+    }
+
+    .trader-current-amount::before {
+        content: "Amount:";
+        min-width:80px;
+        display:inline-block;
+    }
+
+    .trader-last-trade::before {
+        content: "Last Trade:";
+        min-width:80px;
+        display:inline-block;
+    }
+
+    .trader-last-profit::before {
+        content: "Last Profit:";
+        min-width:80px;
+        display:inline-block;
+    }
+}
