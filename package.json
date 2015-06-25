@@ -4,6 +4,7 @@
   "description": "algorithmic trading in a browser",
   "dependencies": {
     "express": "^4.10.2",
-    "socket.io": "^1.3.5"
+    "socket.io": "^1.3.5",
+    "underscore": "^1.8.3"
   }
 }
