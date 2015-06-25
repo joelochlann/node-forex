@@ -1,0 +1,8 @@
+{
+  "name": "node-forex",
+  "version": "0.0.1",
+  "description": "algorithmic trading in a browser",
+  "dependencies": {
+    "express": "^4.10.2"
+  }
+}
