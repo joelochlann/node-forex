@@ -1,5 +1,5 @@
 (function(){
-	window.StupidTrader = {
+	var StupidTrader = {
 		buy:false,
 		sell:false,
 		buySignal: function(tick) {
