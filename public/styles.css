@@ -9,9 +9,18 @@
 #status-bar::before {
   content: "Last Known Status:";
 }
+.tick-widget {
+  font-size: 27px;
+}
+.tick-widget.green {
+  color: green;
+}
+.tick-widget.red {
+  color: red;
+}
 .trader {
   border: 1px solid black;
-  width: 200px;
+  width: 300px;
   float: left;
   margin-right: 10px;
   box-shadow: 10px 10px 5px #888888;
