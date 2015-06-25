@@ -22,12 +22,13 @@
         <!-- Templates here-->
         <script id="trader-template" type="text/x-handlebars-template">
             <div class='trader panel panel-default'>
-                <div class='panel-heading'>
-                    <h3 class='panel-title'>{{title}}</h3>
+                <div class='panel-heading clearfix'>
+                    <h3 class='panel-title pull-left'>{{title}}</h3>
+                    <button class="btn pull-right" data-target=".trader-options" data-toggle="collapse" data-parent=".trader">Options</button>
                 </div>
                 <div class='trader-body panel-body'>
-                    <div class='trader-last-trade property'>
-                        {{last_trade}}
+                    <div class="trader-options panel-collapse collapse" role="tabpanel">
+                        <input />
                     </div>
                     <div class='trader-last-profit property'>
                         {{last_profit}}
@@ -53,7 +54,7 @@
         <!-- Traders -->
         <script type='text/javascript' src='/js/tick-widget.js'></script>
         <script type='text/javascript' src='/js/trader.js'></script>
-        <script type='text/javascript' src='/js/traders/stupid-trader.js'></script>
+        <script type='text/javascript' src='/js/traders/random-trader.js'></script>
 
         <!-- Entrance into scripts -->
         <script type='text/javascript' src='/js/main.js'></script>

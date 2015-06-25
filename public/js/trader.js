@@ -37,10 +37,10 @@
 
 		this.display = function(template) {
 			var context = {
-				title:this.title, 
-				balance:parseFloat(this.balance).toFixed(2), 
-				last_trade:this.displayLastTrade(), 
-				last_profit:this.lastProfit, 
+				title:this.title,
+				balance:parseFloat(this.balance).toFixed(2),
+				last_trade:this.displayLastTrade(),
+				last_profit:this.lastProfit,
 				current_amount:this.amount
 			}
 
@@ -61,5 +61,5 @@
 
 			return text;
 		};
-	}	
+	}
 })();
