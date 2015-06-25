@@ -2,12 +2,12 @@
 	window.BasicTrader = {
 		buy:false,
 		sell:false,
-        memorySize: 3,
+        memorySize: 100000,
         memory:[],
 		buySignal: function(tick) {
             this.pushToMemory(tick);
-
-            if (isThreeHigh) {
+            var sma = new Sma(50,100, this.memory);
+            if (sma.isGoldenCrossHint()) {
                 this.buy = true;
             }
 
@@ -18,6 +18,10 @@
 			if (this.buy) {
 				return false;
 			}
+            var sma = new Sma(50,100, this.memory);
+            if (sma.isDeathCrossHint()) {
+                this.sell = true;
+            }
 
 			return this.sell;
 		},
