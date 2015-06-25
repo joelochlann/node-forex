@@ -35,19 +35,13 @@
 			}
 		};
 
-		this.display = function(template) {
-			var context = {
-				title:this.title,
-				balance:parseFloat(this.balance).toFixed(2),
-				last_trade:this.displayLastTrade(),
-				last_profit:this.lastProfit,
-				current_amount:this.amount
-			}
+		this.info = function() {
+			return  {
+				title:this.title
+			};
+		}
 
-			return template(context);
-		};
-
-		this.displayLastTrade = function() {
+		this.displayLastTrade = function(template) {
 			var text = "";
 			var side = this.lastTrade.side;
 			if (side === 'B') {
@@ -59,7 +53,19 @@
 			text += " @ ";
 			text += this.lastTrade.price;
 
-			return text;
+			return template({'last_trade':text});
+		};
+
+		this.displayLastProfit = function(template) {
+			return template({'last_profit':this.lastProfit});
+		};
+
+		this.displayBalance = function(template) {
+			return template({'balance':parseFloat(this.balance).toFixed(2)});
+		};
+
+		this.displayAmount = function(template) {
+			return template({'current_amount':this.amount});
 		};
 	}
 })();

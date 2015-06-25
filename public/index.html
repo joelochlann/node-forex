@@ -20,8 +20,8 @@
         <script type='text/javascript' src='/socket.io/socket.io.js'></script>
 
         <!-- Templates here-->
-        <script id="trader-template" type="text/x-handlebars-template">
-            <div class='trader panel panel-default'>
+        <script id="trader-template" lass='handlebars' type="text/x-handlebars-template">
+            <div class='trader panel panel-default' data-id="{{id}}">
                 <div class='panel-heading clearfix'>
                     <h3 class='panel-title pull-left'>{{title}}</h3>
                     <button class="btn pull-right" data-target=".trader-options" data-toggle="collapse" data-parent=".trader">Options</button>
@@ -30,18 +30,42 @@
                     <div class="trader-options panel-collapse collapse" role="tabpanel">
                         <input />
                     </div>
-                    <div class='trader-last-profit property'>
-                        {{last_profit}}
+                    <div class='trader-last-trade'>
+                    </div>
+                    <div class='trader-last-profit'>
                     </div>
                 </div>
                 <div class='panel-footer'>
-                    <div>
-                        GBP Balance: {{balance}}
+                    <div class="trader-balance">
                     </div>
-                    <div>
-                        USD Balance: {{current_amount}}
+                    <div class = "trader-amount">
                     </div>
                 </div>
+            </div>
+        </script>
+
+        <script id='trader-last-trade' class='partial handlebars' type="text/x-handlebars-template">
+            <div class='trader-last-trade property'>
+                {{last_trade}}
+            </div>
+        </script>
+
+
+        <script id='trader-last-profit' class='partial handlebars'  type="text/x-handlebars-template">
+            <div class='trader-last-profit property'>
+                {{last_profit}}
+            </div>
+        </script>
+
+        <script id='trader-balance' class='partial handlebars'  type="text/x-handlebars-template">
+            <div class="trader-balance">
+                GBP Balance: {{balance}}
+            </div>
+        </script>
+
+        <script id='trader-amount' class='partial handlebars'  type="text/x-handlebars-template">
+            <div class = "trader-amount">
+                USD Balance: {{current_amount}}
             </div>
         </script>
 
