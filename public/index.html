@@ -7,28 +7,16 @@
 
         <title>Algorithmic Trading in a browser!</title>
 
-        <!-- LESS Stylesheets (because they have to come before less.min.js) -->
-        <script type='text/javascript'>
-            less = {
-                env:"development",
-                async:"false",
-                fileAsync:"false",
-                poll:1000,
-                functions:{},
-                dumpLineNumbers:"comments",
-                relativeUrls:false
-            }
-        </script>
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-        <link rel="stylesheet/less" type="text/css" href="styles.less" />
+        <link rel="stylesheet" href="styles.css" />
 
         <!-- Utilities -->
         <script type='text/javascript' src='/js/jquery-2.1.4.min.js'></script>
         <script type='text/javascript' src='/js/bootstrap.min.js'></script>
         <script type='text/javascript' src='/js/handlebars-v3.0.3.js'></script>
         <script type='text/javascript' src='/js/underscore-min.js'></script>
-        <script type='text/javascript' src='/js/less.min.js'></script>
+        <script src="http://code.highcharts.com/stock/highstock.js"></script>
         <script type='text/javascript' src='/socket.io/socket.io.js'></script>
 
         <!-- Templates here-->
@@ -77,7 +65,9 @@
 
           <div class="jumbotron">
             <h1>Big Fat Price Graph</h1>
-            <p id="status-bar" class="lead">Last known status</p>
+            <div class="panel panel-default">
+              <div id="price-chart" class="panel-body"></div>
+            </div>
           </div>
 
           <div class="row marketing">
@@ -102,7 +92,7 @@
               <h4>Subheading</h4>
               <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
             </div>
-          </div>
+         </div>
           <footer class="footer">
             <p>&copy; Dom, Joe & Hongfu 2015</p>
           </footer>

@@ -13,9 +13,14 @@
 
 		    var tradersElement = $("#traders");
 
+            this.initCharts();
+
 		    var socket = io();
 		    socket.on('tick', function(tick) {
 		        console.log(tick);
+                var chart = $('#price-chart').highcharts();
+                chart.series[0].addPoint([tick.timestamp, tick.close]);
+
 		        tradersElement.empty();
 
 				// Loop through array,
@@ -28,6 +33,27 @@
 
 				$(statusBar).html(JSON.stringify(tick));
 		    });
-		}
-	}
+		},
+
+        initCharts: function() {
+            $('#price-chart').highcharts('StockChart', {
+                rangeSelector: {
+                    selected: 1
+                },
+                title: {
+                    text: 'GBP to USD Exchange Rate'
+                },
+                series: [{
+                    name: 'GBP to USD',
+                    tooltip: {
+                        valueDecimals: 2
+                    }
+                }]
+            });
+        }
+
+
+	};
+
 })();
+
