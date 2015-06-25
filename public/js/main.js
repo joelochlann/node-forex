@@ -15,8 +15,20 @@
 
 			conn.onerror = function(e) {
 				$(statusBar).html("Error - see console.");
-			    console.log(e);	
+			    console.log(e);
 			}
 		}
 	}
+
+    var socket = io();
+    socket.on('tick', function(tick) {
+        console.log(tick);
+        $('body').append($('<li>').text(
+            'timestamp: '+tick.timestamp+', '+
+            'open: '+tick.open+', '+
+            'high: '+tick.high+', '+
+            'low: '+tick.low+', '+
+            'close: '+tick.close
+        ));
+    });
 })();
