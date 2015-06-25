@@ -3,7 +3,7 @@
 		run:function(socketAddress) {
 
 			// Set up traders
-			traders = [new Trader(10000, StupidTrader.buy, StupidTrader.sell)];
+			traders = [new Trader(10000, StupidTrader.buySignal, StupidTrader.sellSignal)];
 
 			// Set up status bar
 			var statusBar = $(document).find("#status-bar");
