@@ -1,6 +1,6 @@
 (function() {
 	window.Platform = {
-		run:function(socketAddress) {
+		run:function() {
 
 			// Set up traders
 			traders = [new Trader(10000, StupidTrader.buySignal, StupidTrader.sellSignal)];
@@ -10,7 +10,6 @@
 
 		    var socket = io();
 		    socket.on('tick', function(tick) {
-		        console.log(tick);
 
 				// Loop through array,
 				// Pass message to each trader.
