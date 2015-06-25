@@ -1,9 +1,5 @@
 (function(){
-	function StupidTrader() {
-
-	}
-
-	StupidTrader.prototype = {
+	var StupidTrader = {
 		buySignal: function() {
 
 		},
