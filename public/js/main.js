@@ -3,8 +3,7 @@
 		run:function(socketAddress) {
 
 			// Set up traders
-			//traders = [new Trader(10000, StupidTrader.buy, StupidTrader.sell, StupidTrader)];
-			var traders = [];
+			traders = [new Trader(10000, StupidTrader.buy, StupidTrader.sell)];
 
 			// Set up status bar
 			var statusBar = $(document).find("#status-bar");
@@ -23,11 +22,10 @@
 				// Loop through array,
 				// Pass message to each trader.
 				traders.forEach(function(trader) {
-					trader.onMessage(e);
+					trader.trade(tick);
 				});
-				$(statusBar).html(JSON.stringify(e.data));
+				$(statusBar).html(JSON.stringify(tick));
 		    });
-		    // @todo: Find out onError.
 		}
 	}
 })();
