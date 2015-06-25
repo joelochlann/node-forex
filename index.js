@@ -20,7 +20,7 @@ setInterval(function() {
         i = 0;
     }
     var val = sineVals[i++];
-    io.emit('tick', {timestamp: i, open: val, high: val, low: val, close: val});
+    io.emit('tick', {timestamp: Date.now(), open: val, high: val, low: val, close: val});
 }, 1000);
 
 http.listen(3000, function() {
