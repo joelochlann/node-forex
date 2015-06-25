@@ -3,7 +3,10 @@
 		run:function() {
 
 			// Set up traders
-			traders = [new Trader("RandomTrader", 10000, RandomTrader.buySignal, RandomTrader.sellSignal)];
+			traders = [
+				new RandomTrader("RandomTrader", 10000),
+				new MovingAverageTrader("MovingAverageTrader", 50000, 10)
+			];
 
 			// Set up status bar
 			var statusBar = $(document).find("#status-bar");

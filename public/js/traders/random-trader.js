@@ -1,7 +1,7 @@
 (function(){
-	window.RandomTrader = {
-		buy:false,
-		sell:false,
+	window.RandomTrader = Trader.extend({
+		buy: false,
+		sell: false,
 		buySignal: function(tick) {
 			this.buy = Math.floor(Math.random() * 2) === 0;
 
@@ -16,5 +16,5 @@
 
 			return this.sell;
 		}
-	}
+	});
 })();
