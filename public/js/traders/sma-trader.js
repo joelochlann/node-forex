@@ -26,6 +26,7 @@ window.SimpleMovingAverageTrader = (function(){
         longPeriod: 10,
         defaultDecimalPoint: 1,
 		buySignal: function(tick) {
+            this.buy = false;
             if(typeof self.need_init==='undefined') {
                 init();
             }
@@ -33,13 +34,13 @@ window.SimpleMovingAverageTrader = (function(){
             var sma = new Sma(this.shortPeriod,this.longPeriod, self.memory, this.defaultDecimalPoint);
             sma.parse();
             if (sma.goldenCrossHint) {
-                console.log('golden: '+sma.goldenCrossHint)
                 this.buy = true;
             }
 
 			return this.buy;
 		},
 		sellSignal: function(tick) {
+            this.sell = false;
 			// If we bought, then don't immediately sell.
 			if (this.buy) {
 				return false;
@@ -47,7 +48,6 @@ window.SimpleMovingAverageTrader = (function(){
             var sma = new Sma(this.shortPeriod,this.longPeriod, self.memory, this.defaultDecimalPoint);
             sma.parse();
             if (sma.deathCrossHint) {
-                console.log('death: ' + sma.deathCrossHint)
                 this.sell = true;
             }
 

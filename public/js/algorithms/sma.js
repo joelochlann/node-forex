@@ -38,10 +38,8 @@
 
             if (shortPeriodMA == longPeriodMA) {
                 if (previousLongMA > previousShortMA) {
-                    console.log('isDeathCrossHint');
                     this.deathCrossHint = true;
                 } else {
-                    console.log('isGoldenCrossHint');
                     this.goldenCrossHint = true;
                 }
             }
