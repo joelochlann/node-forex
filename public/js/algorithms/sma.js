@@ -6,9 +6,6 @@
         this.deathCrossHint = false;
         this.goldenCrossHint = false;
         this.defaultDecimalPoint = defaultDecimalPoint;
-        //console.log('shortPeriod: '+shortPeriod);
-        //console.log('longPeriod: '+longPeriod);
-        //console.log('defaultDecimalPoint: '+defaultDecimalPoint);
 
         this.getPreviousMAByPeriod = function(period) {
             if (this.marketData.length <= period) {
@@ -39,10 +36,6 @@
             var previousShortMA = previousShortMA.toFixed(this.defaultDecimalPoint);
             var previousLongMA = previousLongMA.toFixed(this.defaultDecimalPoint);
 
-            //console.log('ShortMA: '+shortPeriodMA);
-            //console.log('previousShortMA: '+previousShortMA);
-            //console.log('longPeriodMA: '+longPeriodMA);
-            //console.log('previousLongMA: '+previousLongMA);
             if (shortPeriodMA == longPeriodMA) {
                 if (previousLongMA > previousShortMA) {
                     console.log('isDeathCrossHint');
