@@ -16,16 +16,16 @@ This project uses, a few existing algorithms to buy and sell currencies. Now, an
 
 <Technical Side>
 100% pure unadulterated JavaScript!
-- Everything handled by node.js: both static HTML/JS/CSS, and WebSockets which push price data to and receive trade data from the browser
-- Socket.IO is a nice API on top of WebSockets
-- Everything a breeze with npm
-- Rough-and-ready clientside JS (jQuery, underscore, Handlebars, Highcharts, Bootstrap)
-- For pseudo-classical inheritance, we used a 60-line implementation by John Resig
-- Trader base class, subclasses implement particular algorithms (through buySignal/sellSignal methods)
-- Scope for improvement:
--- Angular/React/something! (ran into problems updating templates)
--- Transpiler (Babel/Traceur) for ES6/TypeScript syntax
--- jspm for package management (rather than the usual ever-growing list of script tags)
+* Everything handled by node.js: both static HTML/JS/CSS, and WebSockets which push price data to and receive trade data from the browser
+* Socket.IO is a nice API on top of WebSockets
+* Everything a breeze with npm
+* Rough-and-ready clientside JS (jQuery, underscore, Handlebars, Highcharts, Bootstrap)
+* For pseudo-classical inheritance, we used a 60-line implementation by John Resig
+* Trader base class, subclasses implement particular algorithms (through buySignal/sellSignal methods)
+* Scope for improvement:
+ * Angular/React/something! (ran into problems updating templates)
+ * Transpiler (Babel/Traceur) for ES6/TypeScript syntax
+ * jspm for package management (rather than the usual ever-growing list of script tags)
 
 <Finishing notes>
 Now, algorithmic trading isn't anything new. There are a lot of companies that offer the technical information on their charts - however the ones that allow trading from those same charts is few and far between. An alert when a currency hits a certain exchange rate, "Google: EURGBP Set Alert" - 7 million results. Try doing the same thing for a Moving Average Alert, and suddenly your options are a little limited.
