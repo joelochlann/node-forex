@@ -36,7 +36,6 @@
 			var averageDown = losses / this.period;
 
 			this.currentRSI = 100 - (100/(1 + (averageUp/averageDown)));
-			console.log("Current RSI: " + this.currentRSI);
 
 			return this.currentRSI <= 30;
 		},

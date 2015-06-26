@@ -13,8 +13,8 @@
 
 		trade: function(tick) {
 			if (this.buySignal(tick) && this.balance > tick.close) {
-				this.amount = Math.floor(this.balance * tick.close);
-                console.log('buy: ' + this.amount)
+				var tradedAmount = Math.floor(this.balance * tick.close);
+				this.amount += tradedAmount
 				this.lastTrade = {
 					'side': 'B',
 					'amount': this.amount,
@@ -28,7 +28,6 @@
 			}
             var test  = this.sellSignal(tick) && this.amount > 0;
 			if (this.sellSignal(tick) && this.amount > 0) {
-                console.log('sell: ' + this.amount*tick.close)
 				this.balance += this.amount / tick.close;
 				this.lastTrade = {
 					'side' : 'S',
@@ -59,7 +58,7 @@
 				text += " @ ";
 				text += this.lastTrade.price;
 			} else {
-				text = "N/A";
+				text = "None";
 			}
 
 			return template({'last_trade':text});
