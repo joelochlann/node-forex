@@ -1,11 +1,14 @@
 (function(){
-    window.Sma = function(shortPeriod, longPeriod, marketData) {
+    window.Sma = function(shortPeriod, longPeriod, marketData, defaultDecimalPoint) {
         this.shortPeriod = shortPeriod;
         this.longPeriod = longPeriod;
         this.marketData = marketData;
         this.deathCrossHint = false;
         this.goldenCrossHint = false;
-        this.defaultDecimalPoint = 1;
+        this.defaultDecimalPoint = defaultDecimalPoint;
+        //console.log('shortPeriod: '+shortPeriod);
+        //console.log('longPeriod: '+longPeriod);
+        //console.log('defaultDecimalPoint: '+defaultDecimalPoint);
 
         this.getPreviousMAByPeriod = function(period) {
             if (this.marketData.length <= period) {

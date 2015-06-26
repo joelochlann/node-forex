@@ -22,12 +22,15 @@ window.SimpleMovingAverageTrader = (function(){
     return Trader.extend({
 		buy:false,
 		sell:false,
+        shortPeriod: 5,
+        longPeriod: 10,
+        defaultDecimalPoint: 1,
 		buySignal: function(tick) {
             if(typeof self.need_init==='undefined') {
                 init();
             }
             self.pushToMemory(tick);
-            var sma = new Sma(5,10, self.memory);
+            var sma = new Sma(this.shortPeriod,this.longPeriod, self.memory, this.defaultDecimalPoint);
             sma.parse();
             if (sma.goldenCrossHint) {
                 console.log('golden: '+sma.goldenCrossHint)
@@ -41,7 +44,7 @@ window.SimpleMovingAverageTrader = (function(){
 			if (this.buy) {
 				return false;
 			}
-            var sma = new Sma(5,10, self.memory);
+            var sma = new Sma(this.shortPeriod,this.longPeriod, self.memory, this.defaultDecimalPoint);
             sma.parse();
             if (sma.deathCrossHint) {
                 console.log('death: ' + sma.deathCrossHint)
@@ -53,7 +56,8 @@ window.SimpleMovingAverageTrader = (function(){
         inputs: function() {
             return [
             {name: 'short period', property: 'shortPeriod', value: this.shortPeriod},
-            {name: 'long period', property: 'longPeriod', value: this.longPeriod}
+            {name: 'long period', property: 'longPeriod', value: this.longPeriod},
+            {name: 'decimal point', property: 'defaultDecimalPoint', value: this.defaultDecimalPoint}
             ];
         }
     })
