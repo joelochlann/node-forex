@@ -50,5 +50,11 @@ window.SimpleMovingAverageTrader = (function(){
 
 			return this.sell;
 		},
+        inputs: function() {
+            return [
+            {name: 'short period', property: 'shortPeriod', value: this.shortPeriod},
+            {name: 'long period', property: 'longPeriod', value: this.longPeriod}
+            ];
+        }
     })
 })();
