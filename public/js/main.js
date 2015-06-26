@@ -75,7 +75,7 @@
 					if (trade) {
 						socket.emit('trade', _.extend(trade, {
 							trader: trader.title,
-							balance: trade.balance
+							balance: trader.balance
 						}));
 					}
 
