@@ -36,7 +36,7 @@
             var previousShortMA = previousShortMA.toFixed(this.defaultDecimalPoint);
             var previousLongMA = previousLongMA.toFixed(this.defaultDecimalPoint);
 
-            if (shortPeriodMA == longPeriodMA) {
+            if (shortPeriodMA === longPeriodMA) {
                 if (previousLongMA > previousShortMA) {
                     this.deathCrossHint = true;
                 } else {

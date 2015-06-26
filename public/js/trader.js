@@ -26,7 +26,6 @@
 			if (isNaN(this.amount) || isNaN(this.balance)) {
 				console.log("Amount and / or balance went NaN");
 			}
-            var test  = this.sellSignal(tick) && this.amount > 0;
 			if (this.sellSignal(tick) && this.amount > 0) {
 				this.balance += this.amount / tick.close;
 				this.lastTrade = {
