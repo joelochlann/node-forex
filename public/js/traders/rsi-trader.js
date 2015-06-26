@@ -1,9 +1,17 @@
 (function(){
 	window.RSITrader = Trader.extend({
 		period:14,
+		buyAt:30,
+		sellAt:70,
 		memory:[],
-		init: function(title, balance, period) {
+		init: function(title, balance, period, buyAt, sellAt) {
 			this.period = period;
+			if (buyAt !== undefined) {
+				this.buyAt = buyAt;
+			}
+			if (sellAt !== undefined) {
+				this.sellAt = sellAt;
+			}
 			this._super(title, balance);
 		},
 		buySignal: function(tick) {
@@ -37,14 +45,16 @@
 
 			this.currentRSI = 100 - (100/(1 + (averageUp/averageDown)));
 
-			return this.currentRSI <= 30;
+			return this.currentRSI <= this.buyAt;
 		},
 		sellSignal: function(tick) {
-			return this.currentRSI >= 70;
+			return this.currentRSI >= this.sellAt;
 		},
 		inputs: function() {
 			return [
-				{name: 'Period', property: 'period', value: this.period}
+				{name: 'Period', property: 'period', value: this.period},
+				{name: 'Buy At', property: 'buyAt', value: this.buyAt},
+				{name: 'Sell At', property: 'sellAt', value: this.sellAt},
 			];
 		}
 	});
