@@ -1,16 +1,18 @@
 (function(){
-	window.Trader = function(title, balance, buyFunction, sellFunction) {
-		this.title = title;
-		this.balance = balance;
-		this.buyFunction = buyFunction;
-		this.sellFunction = sellFunction;
-		this.amount = 0;
-		this.lastTrade = {};
-		this.lastProfit = 0;
-		this.preBalance = balance;
+	window.Trader = Class.extend({ 
+		init: function(title, balance) {
+			this.title = title;
+			this.balance = balance;
+			// this.buySignal = buySignal;
+			// this.sellSignal = sellSignal;
+			this.amount = 0;
+			this.lastTrade = {};
+			this.lastProfit = 0;
+			this.preBalance = balance;
+		},
 
-		this.trade = function(tick) {
-			if (this.buyFunction(tick) && this.balance > tick.close) {
+		trade: function(tick) {
+			if (this.buySignal(tick) && this.balance > tick.close) {
 				this.amount = Math.floor(this.balance / tick.close);
 				this.lastTrade = {
 					'side': 'B',
@@ -23,7 +25,7 @@
 			if (isNaN(this.amount) || isNaN(this.balance)) {
 				console.log("Amount and / or balance went NaN");
 			}
-			if (this.sellFunction(tick) && this.amount > 0) {
+			if (this.sellSignal(tick) && this.amount > 0) {
 				this.balance += this.amount * tick.close;
 				this.lastTrade = {
 					'side' : 'S',
@@ -33,15 +35,15 @@
 				this.amount = 0;
 				this.lastProfit = parseFloat("" + (this.balance - this.preBalance)).toFixed(2);
 			}
-		};
+		},
 
-		this.info = function() {
+		info: function() {
 			return  {
 				title:this.title
 			};
-		}
+		},
 
-		this.displayLastTrade = function(template) {
+		displayLastTrade: function(template) {
 			var text = "";
 			var side = this.lastTrade.side;
 			if (side === 'B') {
@@ -54,18 +56,22 @@
 			text += this.lastTrade.price;
 
 			return template({'last_trade':text});
-		};
+		},
 
-		this.displayLastProfit = function(template) {
+		displayLastProfit: function(template) {
 			return template({'last_profit':this.lastProfit});
-		};
+		},
 
-		this.displayBalance = function(template) {
+		displayBalance: function(template) {
 			return template({'balance':parseFloat(this.balance).toFixed(2)});
-		};
+		},
 
-		this.displayAmount = function(template) {
+		displayAmount: function(template) {
 			return template({'current_amount':this.amount});
-		};
-	}
+		},
+
+		inputs: function() {
+			return {};
+		}
+	});
 })();

@@ -3,8 +3,10 @@
 		run:function() {
 
 			// Set up traders
-			traders = [new Trader("RandomTrader", 10000, RandomTrader.buySignal, RandomTrader.sellSignal)];
-			traders = [new Trader("SMATrader", 10000, SimpleMovingAverageTrader.buySignal, SimpleMovingAverageTrader.sellSignal)];
+			traders = [
+				new RandomTrader("RandomTrader", 10000),
+				new MovingAverageTrader("MovingAverageTrader", 50000, 10)
+			];
 
 			// Set up status bar
 			var statusBar = $(document).find("#status-bar");
@@ -34,7 +36,27 @@
             this.initCharts();
 
             traders.forEach(function(trader, index) {
-            	tradersElement.append(traderTemplate({'id':index, 'title':trader.title}));
+            	tradersElement.append(traderTemplate({
+            		'id':index,
+            		'title':trader.title,
+            		'inputs':trader.inputs()
+            	}));
+            });
+
+            $('.trader-options input').on('blur', function(e) {
+            	var trader = traders[$(this).closest('.trader').data('id')];
+
+            	// ASSUMES PARAMS SHOULD BE FLOATS/INTS, and tries to store them as such.
+            	// If it can't, it sets the value to zero.
+            	var rawValue = $(this).val();
+            	var parsedValue = parseFloat(rawValue);
+            	if (isNaN(parsedValue)) {
+            		trader[$(this).data('property')] = 0;
+            		$(this).val(0);
+            	} else {
+            		trader[$(this).data('property')] = parsedValue;
+            	}
+            	console.log(trader);
             });
 
 		    var socket = io();

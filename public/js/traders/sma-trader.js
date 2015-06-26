@@ -19,7 +19,7 @@ window.SimpleMovingAverageTrader = (function(){
         self.needInit=false;
     };
 
-    return {
+    return Trader.extend({
 		buy:false,
 		sell:false,
 		buySignal: function(tick) {
@@ -48,5 +48,5 @@ window.SimpleMovingAverageTrader = (function(){
 
 			return this.sell;
 		},
-    }
+    })
 })();
