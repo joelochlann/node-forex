@@ -31,11 +31,11 @@ This project uses, a few existing algorithms to buy and sell currencies. Now, an
 
 * Scope for improvement:
 
- * Angular/React/something! (ran into problems updating templates)
+  * Angular/React/something! (ran into problems updating templates)
 
- * Transpiler (Babel/Traceur) for ES6/TypeScript syntax
+  * Transpiler (Babel/Traceur) for ES6/TypeScript syntax
 
- * jspm for package management (rather than the usual ever-growing list of script tags)
+  * jspm for package management (rather than the usual ever-growing list of script tags)
 
 <Finishing notes>
 Now, algorithmic trading isn't anything new. There are a lot of companies that offer the technical information on their charts - however the ones that allow trading from those same charts is few and far between. An alert when a currency hits a certain exchange rate, "Google: EURGBP Set Alert" - 7 million results. Try doing the same thing for a Moving Average Alert, and suddenly your options are a little limited.
