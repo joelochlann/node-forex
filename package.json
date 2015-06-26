@@ -2,6 +2,10 @@
   "name": "node-forex",
   "version": "0.0.1",
   "description": "algorithmic trading in a browser",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "express": "^4.10.2",
     "socket.io": "^1.3.5",
