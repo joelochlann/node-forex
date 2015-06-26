@@ -16,15 +16,25 @@ This project uses, a few existing algorithms to buy and sell currencies. Now, an
 
 <Technical Side>
 100% pure unadulterated JavaScript!
+
 * Everything handled by node.js: both static HTML/JS/CSS, and WebSockets which push price data to and receive trade data from the browser
+
 * Socket.IO is a nice API on top of WebSockets
+
 * Everything a breeze with npm
+
 * Rough-and-ready clientside JS (jQuery, underscore, Handlebars, Highcharts, Bootstrap)
+
 * For pseudo-classical inheritance, we used a 60-line implementation by John Resig
+
 * Trader base class, subclasses implement particular algorithms (through buySignal/sellSignal methods)
+
 * Scope for improvement:
+
  * Angular/React/something! (ran into problems updating templates)
+
  * Transpiler (Babel/Traceur) for ES6/TypeScript syntax
+
  * jspm for package management (rather than the usual ever-growing list of script tags)
 
 <Finishing notes>
