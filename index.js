@@ -1,8 +1,12 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
+
+app.set('port', (process.env.PORT || 3000));
+
 var io = require('socket.io')(http);
 var _ = require('underscore');
+
 
 app.use(express.static('public'));
 
@@ -32,6 +36,6 @@ setInterval(function() {
     io.emit('tick', {timestamp: Date.now(), open: val, high: val, low: val, close: val});
 }, 1000);
 
-http.listen(3000, function() {
-    console.log('listening on *:3000');
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
 });
