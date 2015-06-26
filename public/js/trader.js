@@ -45,15 +45,19 @@
 
 		displayLastTrade: function(template) {
 			var text = "";
-			var side = this.lastTrade.side;
-			if (side === 'B') {
-				text += "Bought ";
+			if (this.lastTrade.amount !== undefined) {
+				var side = this.lastTrade.side;
+				if (side === 'B') {
+					text += "Bought ";
+				} else {
+					text += "Sold ";
+				}
+				text += this.lastTrade.amount;
+				text += " @ ";
+				text += this.lastTrade.price;
 			} else {
-				text += "Sold ";
+				text = "N/A";
 			}
-			text += this.lastTrade.amount;
-			text += " @ ";
-			text += this.lastTrade.price;
 
 			return template({'last_trade':text});
 		},

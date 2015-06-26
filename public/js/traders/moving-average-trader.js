@@ -5,8 +5,6 @@
 		previousMA:null,
 		previousClose:null,
 		currentMA:null,
-		foo:[],
-		sma:[],
 		init: function(title, balance, period) {
 			this.period = period;
 			this._super(title, balance);

@@ -5,7 +5,8 @@
 			// Set up traders
 			traders = [
 				new RandomTrader("RandomTrader", 10000),
-				new MovingAverageTrader("MovingAverageTrader", 50000, 10)
+				new MovingAverageTrader("MovingAverageTrader", 50000, 10),
+				new RSITrader("RSITrader", 50000, 14)
 			];
 
 			// Set up status bar
