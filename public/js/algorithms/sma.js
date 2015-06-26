@@ -1,32 +1,24 @@
 (function(){
-	window.Sma = function(shortPeriod, longPeriod, marketData) {
+    window.Sma = function(shortPeriod, longPeriod, marketData) {
         this.shortPeriod = shortPeriod;
         this.longPeriod = longPeriod;
         this.marketData = marketData;
         this.deathCrossHint = false;
         this.goldenCrossHint = false;
+        this.defaultDecimalPoint = 1;
 
-        // Assume the first one is alway today's tick.
-        this.todayTick = function () {
-            return this.marketData.slice(0,1);
-        };
-
-        this.isDeathCrossHint = function() {
-            return this.deathCrossHint;
-        };
-        this.isGoldenCrossHint = function() {
-            return this.goldenCrossHint;
-        };
         this.getPreviousMAByPeriod = function(period) {
-            if (this.marketData.length <= period+1) {
+            if (this.marketData.length <= period) {
                 return false;
             }
+
             return this.marketData.slice(1, period+1).reduce(function(previous, currenct) { if (previous.hasOwnProperty('close')) {return previous['close'] + currenct['close']; } return previous + currenct['close'];}) / period;
         };
         this.getCurrenctMAByPeriod = function(period) {
             if (this.marketData.length <= period) {
                 return false;
             }
+
             return this.marketData.slice(0, period).reduce(function(previous, currenct) { if (previous.hasOwnProperty('close')) {return previous['close'] + currenct['close']; } return previous + currenct['close'];}) / period;
         };
         this.parse = function() {
@@ -34,19 +26,27 @@
             var longPeriodMA = this.getCurrenctMAByPeriod(this.longPeriod);
             var previousShortMA = this.getPreviousMAByPeriod(this.shortPeriod);
             var previousLongMA = this.getPreviousMAByPeriod(this.longPeriod);
-            console.log(this.marketData);
-            console.log('ShortMA: '+shortPeriodMA);
-            console.log('previousShortMA: '+previousShortMA);
-            console.log('longPeriodMA: '+longPeriodMA);
-            console.log('previousLongMA: '+previousLongMA);
+
             if (!(shortPeriod && longPeriodMA && previousShortMA && previousLongMA)) {
                 return false;
             }
-            if (shortPeriod == longPeriodMA) {
+
+            var shortPeriodMA = shortPeriodMA.toFixed(this.defaultDecimalPoint);
+            var longPeriodMA = longPeriodMA.toFixed(this.defaultDecimalPoint);
+            var previousShortMA = previousShortMA.toFixed(this.defaultDecimalPoint);
+            var previousLongMA = previousLongMA.toFixed(this.defaultDecimalPoint);
+
+            //console.log('ShortMA: '+shortPeriodMA);
+            //console.log('previousShortMA: '+previousShortMA);
+            //console.log('longPeriodMA: '+longPeriodMA);
+            //console.log('previousLongMA: '+previousLongMA);
+            if (shortPeriodMA == longPeriodMA) {
                 if (previousLongMA > previousShortMA) {
-                    this.isDeathCrossHint = true;
+                    console.log('isDeathCrossHint');
+                    this.deathCrossHint = true;
                 } else {
-                    this.isGoldenCrossHint = true;
+                    console.log('isGoldenCrossHint');
+                    this.goldenCrossHint = true;
                 }
             }
         }

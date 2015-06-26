@@ -6,7 +6,7 @@ window.SimpleMovingAverageTrader = (function(){
     this.memory = [];
 
     this.pushToMemory = function (tick) {
-        this.memory.push(tick);
+        this.memory.unshift(tick);
         // So we remove the last element from out memory if it exceed the memory size.
         if (this.memory.length > this.memorySize) {
             this.memory.pop();
@@ -29,7 +29,8 @@ window.SimpleMovingAverageTrader = (function(){
             self.pushToMemory(tick);
             var sma = new Sma(5,10, self.memory);
             sma.parse();
-            if (sma.isGoldenCrossHint()) {
+            if (sma.goldenCrossHint) {
+                console.log('golden: '+sma.goldenCrossHint)
                 this.buy = true;
             }
 
@@ -42,7 +43,8 @@ window.SimpleMovingAverageTrader = (function(){
 			}
             var sma = new Sma(5,10, self.memory);
             sma.parse();
-            if (sma.isDeathCrossHint()) {
+            if (sma.deathCrossHint) {
+                console.log('death: ' + sma.deathCrossHint)
                 this.sell = true;
             }
 
