@@ -13,14 +13,15 @@
 
 		trade: function(tick) {
 			if (this.buySignal(tick) && this.balance > tick.close) {
-				this.amount = Math.floor(this.balance / tick.close);
+				var tradedAmount = Math.floor(this.balance / tick.close);
+				this.amount += tradedAmount
 				this.lastTrade = {
 					'side': 'B',
 					'amount': this.amount,
 					'price': tick.close
 				};
 				this.preBalance = this.balance;
-				this.balance -= parseFloat("" + (this.amount * tick.close)).toFixed(2);
+				this.balance -= parseFloat("" + (tradedAmount * tick.close)).toFixed(2);
 			}
 			if (isNaN(this.amount) || isNaN(this.balance)) {
 				console.log("Amount and / or balance went NaN");
@@ -56,7 +57,7 @@
 				text += " @ ";
 				text += this.lastTrade.price;
 			} else {
-				text = "N/A";
+				text = "None";
 			}
 
 			return template({'last_trade':text});
