@@ -71,7 +71,13 @@
 				// Loop through array,
 				// Pass message to each trader.
 				traders.forEach(function(trader, index) {
-					trader.trade(tick);
+					var trade = trader.trade(tick);
+					if (trade) {
+						socket.emit('trade', _.extend(trade, {
+							trader: trader.title,
+							balance: trade.balance
+						}));
+					}
 
 					var traderBody = tradersElement.find(".trader[data-id=" + index + "]");
 					traderBody.find(".trader-last-trade").replaceWith(trader.displayLastTrade(traderLastTradeTemplate));

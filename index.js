@@ -8,6 +8,9 @@ app.use(express.static('public'));
 
 io.on('connection', function(socket) {
     console.log('a client connected');
+    socket.on('trade', function(trade) {
+    	console.log(trade);
+    });
 })
 
 // How finely do we want to divide up the sine wave?
