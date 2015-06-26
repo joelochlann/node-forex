@@ -74,8 +74,7 @@
 					var trade = trader.trade(tick);
 					if (trade) {
 						socket.emit('trade', _.extend(trade, {
-							trader: trader.title,
-							balance: trader.balance
+							trader: trader.title
 						}));
 					}
 
