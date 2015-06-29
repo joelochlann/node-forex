@@ -1,7 +1,7 @@
 window.SimpleMovingAverageTrader = (function(){
     return Trader.extend({
-		buy:false,
-		sell:false,
+        buy:false,
+        sell:false,
         shortPeriod: 5,
         longPeriod: 10,
         defaultDecimalPoint: 1,
@@ -14,7 +14,7 @@ window.SimpleMovingAverageTrader = (function(){
                 this.memory.pop();
             }
         },
-		buySignal: function(tick) {
+        buySignal: function(tick) {
             this.buy = false;
             this.pushToMemory(tick);
             var sma = new Sma(this.shortPeriod,this.longPeriod, this.memory, this.defaultDecimalPoint);
@@ -23,22 +23,22 @@ window.SimpleMovingAverageTrader = (function(){
                 this.buy = true;
             }
 
-			return this.buy;
-		},
-		sellSignal: function(tick) {
+            return this.buy;
+        },
+        sellSignal: function(tick) {
             this.sell = false;
-			// If we bought, then don't immediately sell.
-			if (this.buy) {
-				return false;
-			}
+            // If we bought, then don't immediately sell.
+            if (this.buy) {
+                return false;
+            }
             var sma = new Sma(this.shortPeriod,this.longPeriod, this.memory, this.defaultDecimalPoint);
             sma.parse();
             if (sma.deathCrossHint) {
                 this.sell = true;
             }
 
-			return this.sell;
-		},
+            return this.sell;
+        },
         inputs: function() {
             return [
             {name: 'short period', property: 'shortPeriod', value: this.shortPeriod},

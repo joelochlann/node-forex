@@ -1,134 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE-edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Algorithmic Trading in a browser!</title>
+    <title>Algorithmic Trading in a browser!</title>
 
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="styles.css" />
 
-        <!-- Utilities -->
-        <script type='text/javascript' src='/js/jquery-2.1.4.min.js'></script>
-        <script type='text/javascript' src='/js/bootstrap.min.js'></script>
-        <script type='text/javascript' src='/js/handlebars-v3.0.3.js'></script>
-        <script type='text/javascript' src='/js/underscore-min.js'></script>
-        <script type='text/javascript' src='/js/class.js'></script>
-        <script src="http://code.highcharts.com/stock/highstock.js"></script>
-        <script type='text/javascript' src='/socket.io/socket.io.js'></script>
+    <!-- Utilities -->
+    <script type='text/javascript' src='/js/jquery-2.1.4.min.js'></script>
+    <script type='text/javascript' src='/js/bootstrap.min.js'></script>
+    <script type='text/javascript' src='/js/handlebars-v3.0.3.js'></script>
+    <script type='text/javascript' src='/js/underscore-min.js'></script>
+    <script type='text/javascript' src='/js/class.js'></script>
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script type='text/javascript' src='/socket.io/socket.io.js'></script>
 
-        <!-- Templates here-->
-        <script id="trader-template" lass='handlebars' type="text/x-handlebars-template">
-            <div class="col-lg-6">
-                <div class='trader panel panel-default' data-id="{{id}}">
-                    <div class='panel-heading clearfix'>
-                        <div class="clearfix">
-                            <h3 class='panel-title pull-left'>{{title}}</h3>
-                            <button class="btn pull-right" data-target="[data-id='{{id}}'] .trader-options" data-toggle="collapse" data-parent=".trader">Options</button>
-                        </div>    
-                        <div class="clearfix">
-                            <form class="form-horizontal trader-options panel-collapse collapse" role="tabpanel">
-                                {{#each inputs}}
-                                    <div class="form-group">
-                                        <label class="col-sm-7 control-label">{{this.name}}</label>
-                                        <div class="col-sm-5">
-                                            <input type="number" class="form-control" data-property="{{this.property}}" value="{{this.value}}">
-                                        </div>
-                                    </div>
-                                {{/each}}
-                            </form>
-                        </div>
+    <!-- Templates here-->
+    <script id="trader-template" lass='handlebars' type="text/x-handlebars-template">
+      <div class="col-lg-6">
+        <div class='trader panel panel-default' data-id="{{id}}">
+          <div class='panel-heading clearfix'>
+            <div class="clearfix">
+              <h3 class='panel-title pull-left'>{{title}}</h3>
+              <button class="btn pull-right" data-target="[data-id='{{id}}'] .trader-options" data-toggle="collapse" data-parent=".trader">Options</button>
+            </div>    
+            <div class="clearfix">
+              <form class="form-horizontal trader-options panel-collapse collapse" role="tabpanel">
+                {{#each inputs}}
+                  <div class="form-group">
+                    <label class="col-sm-7 control-label">{{this.name}}</label>
+                    <div class="col-sm-5">
+                      <input type="number" class="form-control" data-property="{{this.property}}" value="{{this.value}}">
                     </div>
-                    <div class='trader-body panel-body'>
-
-                        <div class='trader-last-trade'>
-                        </div>
-                        <div class='trader-last-profit'>
-                        </div>
-                    </div>
-                    <div class='panel-footer'>
-                        <div class="trader-balance">
-                        </div>
-                        <div class = "trader-amount">
-                        </div>
-                    </div>
-                </div>
+                  </div>
+                {{/each}}
+              </form>
             </div>
-        </script>
-
-        <script id='trader-last-trade' class='partial handlebars' type="text/x-handlebars-template">
-            <div class='trader-last-trade property'>
-                {{last_trade}}
-            </div>
-        </script>
-
-
-        <script id='trader-last-profit' class='partial handlebars'  type="text/x-handlebars-template">
-            <div class='trader-last-profit property'>
-                {{last_profit}}
-            </div>
-        </script>
-
-        <script id='trader-balance' class='partial handlebars'  type="text/x-handlebars-template">
-            <div class="trader-balance">
-                GBP Balance: {{balance}}
-            </div>
-        </script>
-
-        <script id='trader-amount' class='partial handlebars'  type="text/x-handlebars-template">
-            <div class = "trader-amount">
-                USD Balance: {{current_amount}}
-            </div>
-        </script>
-
-        <script id="tick-widget-template" type="text/x-handlebars-template">
-            <div class="tick-widget label">
-                Last price: {{close}}
-            </div>
-        </script>
-        
-        <!-- Traders -->
-        <script type='text/javascript' src='/js/tick-widget.js'></script>
-        <script type='text/javascript' src='/js/trader.js'></script>
-        <script type='text/javascript' src='/js/traders/random-trader.js'></script>
-        <script type='text/javascript' src='/js/algorithms/sma.js'></script>
-        <script type='text/javascript' src='/js/traders/moving-average-trader.js'></script>
-        <script type='text/javascript' src='/js/traders/sma-trader.js'></script>
-        <script type='text/javascript' src='/js/traders/rsi-trader.js'></script>
-
-        <!-- Entrance into scripts -->
-        <script type='text/javascript' src='/js/main.js'></script>
-        <script type='text/javascript'>
-        	$(document).ready(function() {
-        		window.Platform.run();
-        	});
-        </script>
-    </head>
-    <body>
-        <div class="container">
-          <div class="header clearfix">
-            <nav>
-              <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active">
-                    <!-- Tick widget goes here -->
-                </li>
-              </ul>
-            </nav>
-            <h3 class="text-muted">Algorithmic Trading In The Browser</h3>
           </div>
-
-          <div class="panel panel-default">
-            <div id="price-chart" class="panel-body"></div>
+          <div class='trader-body panel-body'>
+            <div class='trader-last-trade'></div>
+            <div class='trader-last-profit'></div>
           </div>
+          <div class='panel-footer'>
+            <div class="trader-balance"></div>
+            <div class = "trader-amount"></div>
+          </div>
+        </div>
+      </div>
+    </script>
 
-          <div id="traders" class="row"></div>
-          <footer class="footer">
-            <p>&copy; Dom, Joe & Hongfu 2015</p>
-          </footer>
+    <script id='trader-last-trade' class='partial handlebars' type="text/x-handlebars-template">
+      <div class='trader-last-trade property'>
+        {{last_trade}}
+      </div>
+    </script>
 
-        </div> <!-- /container -->
-    </body>
+    <script id='trader-last-profit' class='partial handlebars'  type="text/x-handlebars-template">
+      <div class='trader-last-profit property'>
+        {{last_profit}}
+      </div>
+    </script>
+
+    <script id='trader-balance' class='partial handlebars'  type="text/x-handlebars-template">
+      <div class="trader-balance">
+        GBP Balance: {{balance}}
+      </div>
+    </script>
+
+    <script id='trader-amount' class='partial handlebars'  type="text/x-handlebars-template">
+      <div class = "trader-amount">
+        USD Balance: {{current_amount}}
+      </div>
+    </script>
+
+    <script id="tick-widget-template" type="text/x-handlebars-template">
+      <div class="tick-widget label">
+        Last price: {{close}}
+      </div>
+    </script>
+    
+    <!-- Traders -->
+    <script type='text/javascript' src='/js/tick-widget.js'></script>
+    <script type='text/javascript' src='/js/trader.js'></script>
+    <script type='text/javascript' src='/js/traders/random-trader.js'></script>
+    <script type='text/javascript' src='/js/algorithms/sma.js'></script>
+    <script type='text/javascript' src='/js/traders/moving-average-trader.js'></script>
+    <script type='text/javascript' src='/js/traders/sma-trader.js'></script>
+    <script type='text/javascript' src='/js/traders/rsi-trader.js'></script>
+
+    <!-- Entrance into scripts -->
+    <script type='text/javascript' src='/js/main.js'></script>
+    <script type='text/javascript'>
+      $(document).ready(function() {
+        window.Platform.run();
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+          <li role="presentation" class="active">
+            <!-- Tick widget goes here -->
+          </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Algorithmic Trading In The Browser</h3>
+      </div>
+
+      <div class="panel panel-default">
+        <div id="price-chart" class="panel-body"></div>
+      </div>
+
+      <div id="traders" class="row"></div>
+      <footer class="footer">
+        <p>&copy; Dom, Joe & Hongfu 2015</p>
+      </footer>
+
+    </div> <!-- /container -->
+  </body>
 </html>

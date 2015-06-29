@@ -11,7 +11,7 @@ app.use(express.static('public'));
 io.on('connection', function(socket) {
     console.log('a client connected');
     socket.on('trade', function(trade) {
-    	console.log(trade);
+        console.log(trade);
     });
 })
 
@@ -23,7 +23,7 @@ inputValsFastCycle = _.range(0, Math.PI * 18, Math.PI/(divisions/18));
 sineValsFastCycle = inputValsFastCycle.map(function(x) { return parseFloat((Math.sin(x))); });
 
 sineVals = inputVals.map(function(x, i) {
-	return parseFloat((Math.sin(x) + 3 + sineValsFastCycle[i]).toFixed(2));
+    return parseFloat((Math.sin(x) + 3 + sineValsFastCycle[i]).toFixed(2));
 });
 var i = 0;
 setInterval(function() {
