@@ -13,4 +13,4 @@ node.js, socket.io, Bootstrap, Handlebars, Less, Highcharts
 `npm install`
 
 ## Getting started
-`node index.js` will serve up the application on port 3000
+`node index.js` will serve up the application on port 5000
